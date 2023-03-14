@@ -103,13 +103,14 @@ public class LanguagesServiceImpl implements LanguagesService{
      */
     @Override
     public ResponseEntity<?> delete(Long id) {
-        LanguagesDto languagesDto = mapper.toDto(repository.findById(id).get());
-        if (languagesDto == null) {
+        Languages languages = repository.findById(id).get();
+        if (languages == null) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("Record not found");
         } else {
-            repository.deleteById(languagesDto.getId());
+            languages.setDeleted(true);
+            repository.save(languages);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body("Delete successfully");

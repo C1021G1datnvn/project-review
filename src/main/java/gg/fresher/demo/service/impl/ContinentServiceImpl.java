@@ -101,13 +101,14 @@ public class ContinentServiceImpl implements ContinentService{
      */
     @Override
     public ResponseEntity<?> delete(Long id) {
-        ContinentDto continentDto = mapper.toDto(repository.findById(id).get());
-            if (continentDto == null) {
+        Continent continent = repository.findById(id).get();
+            if (continent == null) {
                 return ResponseEntity
                         .status(HttpStatus.NOT_FOUND)
                         .body("Record not found");
             } else {
-                repository.deleteById(continentDto.getId());
+                continent.setDeleted(true);
+                repository.save(continent);
                 return ResponseEntity
                         .status(HttpStatus.OK)
                         .body("Delete successfully");

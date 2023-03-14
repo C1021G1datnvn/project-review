@@ -101,13 +101,14 @@ public class CountryServiceImpl implements CountryService{
      */
     @Override
     public ResponseEntity<?> delete(Long id) {
-        CountryDto countryDto = mapper.toDto(repository.findById(id).get());
-        if (countryDto == null) {
+        Country country = repository.findById(id).get();
+        if (country == null) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("Record not found");
         } else {
-            repository.deleteById(countryDto.getId());
+            country.setDeleted(true);
+            repository.save(country);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body("Delete successfully");

@@ -104,13 +104,14 @@ public class EthnicityServiceImpl implements EthnicityService{
      */
     @Override
     public ResponseEntity<?> delete(Long id) {
-        EthnicityDto ethnicityDto = mapper.toDto(repository.findById(id).get());
-        if (ethnicityDto == null) {
+        Ethnicity ethnicity = repository.findById(id).get();
+        if (ethnicity == null) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("Record not found");
         } else {
-            repository.deleteById(ethnicityDto.getId());
+            ethnicity.setDeleted(true);
+            repository.save(ethnicity);
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body("Delete successfully");
