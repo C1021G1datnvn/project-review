@@ -1,0 +1,63 @@
+ - Trong Spring Boot, các liên kết được sử dụng để tương tác giữa các thành phần khác nhau của ứng dụng. Có hai loại liên kết chính: 
+    + Liên kết chặt. 
+    + Liên kết lỏng.
+
+=> Liên kết chặt (tight coupling) là một kiểu thiết kế trong đó các thành phần của ứng dụng phụ thuộc mạnh mẽ vào nhau. Điều này có nghĩa
+là nếu một thành phần thay đổi, các thành phần khác sẽ phải thay đổi tương ứng để phù hợp với nó. Liên kết chặt có thể làm cho việc bảo
+trì và phát triển ứng dụng trở nên khó khăn hơn.
+  
+=> Liên kết lỏng (loose coupling) là một kiểu thiết kế trong đó các thành phần của ứng dụng không phụ thuộc mạnh mẽ vào nhau. Điều này có
+nghĩa là các thành phần có thể hoạt động độc lập và không bị ảnh hưởng bởi những thay đổi của nhau. Liên kết lỏng có thể giúp làm cho việc
+bảo trì và phát triển ứng dụng trở nên dễ dàng hơn.
+
+- Trong Spring Boot, các liên kết chặt có thể được hình thành khi sử dụng các annotation như @Autowired để inject các dependency vào một
+bean. 
+- Trong khi đó, các liên kết lỏng có thể được hình thành bằng cách sử dụng các giao diện và các lớp trung gian để giảm thiểu sự phụ thuộc
+giữa các thành phần của ứng dụng.
+
+Ví dụ về liên kết chặt:
+
+    - Giả sử bạn có một ứng dụng Spring Boot đơn giản để quản lý thông tin người dùng. Trong ứng dụng này, bạn có một UserRepository để 
+quản lý các thao tác với người dùng. Bạn muốn sử dụng UserRepository này trong một service khác, UserService để thực hiện các tác vụ liên
+quan đến người dùng. => Trong UserService, bạn sử dụng annotation @Autowired để inject UserRepository vào service. UserService sẽ phụ thuộc
+mạnh mẽ vào UserRepository bởi vì nó sử dụng annotation @Autowired để inject dependency vào UserService. Nếu UserRepository thay đổi hoặc
+bị xóa đi, UserService sẽ không hoạt động đúng cách và sẽ phải được sửa đổi tương ứng.
+
+Ví dụ về liên kết lỏng:
+
+    - Trong ví dụ về liên kết chặt trên, để giảm thiểu sự phụ thuộc giữa UserService và UserRepository, bạn có thể sử dụng một interface 
+hoặc một lớp trung gian giữa các thành phần này. có thể tạo một UserDAO interface để đại diện cho các thao tác với người dùng, và 
+UserRepository sẽ implement UserDAO. UserService sẽ sử dụng UserDAO thay vì UserRepository để thực hiện các tác vụ liên quan đến người dùng.
+=> UserService không phụ thuộc trực tiếp vào UserRepository, mà sử dụng interface UserDAO để giảm thiểu sự phụ thuộc giữa các thành phần.
+Nếu UserRepository thay đổi hoặc bị xóa đi, UserService sẽ không bị ảnh hưởng và vẫn hoạt động bình thường, vì nó chỉ phụ thuộc vào 
+UserDAO interface mà UserRepository implement.
+
+--------------------------------------------------------------------------
+
+- Transaction trong SQL:
+    + Transaction là một chuỗi các lệnh SQL được thực thi như một thực thể duy nhất. Transaction bảo đảm tính toàn vẹn của dữ liệu trong cơ sở dữ liệu bằng cách đảm bảo rằng tất cả các lệnh trong transaction sẽ được thực hiện hoặc không được thực hiện tất cả.
+
+    + Vòng đời của một transaction trong SQL gồm 4 giai đoạn chính:
+    
+    1, Khởi tạo (Begin): Transaction được bắt đầu bằng cách gọi lệnh "BEGIN TRANSACTION" hoặc "START TRANSACTION".
+    
+    2, Thực thi (Execute): Trong giai đoạn này, các lệnh SQL được thực thi trong transaction.
+    
+    3, Xác nhận (Commit): Nếu tất cả các lệnh trong transaction được thực thi thành công, transaction sẽ được xác nhận bằng cách gọi lệnh 
+    "COMMIT". Khi đó, tất cả các thay đổi được lưu trữ vào cơ sở dữ liệu và transaction được kết thúc.
+
+    4,Hoàn tác (Rollback): Nếu bất kỳ lệnh SQL nào trong transaction thất bại, transaction sẽ bị hoàn tác bằng cách gọi lệnh "ROLLBACK". 
+    Trong trường hợp này, tất cả các thay đổi trong transaction sẽ bị hủy và cơ sở dữ liệu sẽ được phục hồi về trạng thái ban đầu.
+    
+
+- Session trong Hibernate:
+    + Session là một đối tượng quản lý kết nối giữa ứng dụng Java và cơ sở dữ liệu. Session cung cấp các phương thức để thực hiện các hoạt
+     động với cơ sở dữ liệu như truy vấn, lưu trữ, xóa và cập nhật dữ liệu.
+
+    + Vòng đời của một Session trong Hibernate gồm 5 giai đoạn chính:
+
+    1, Khởi tạo (Instantiation): Đối tượng Session được tạo ra bằng cách sử dụng hàm SessionFactory.openSession().
+    
+    2, Thực thi (Execution): Trong giai đoạn này
+
+

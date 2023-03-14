@@ -1,0 +1,42 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: demo
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3307/review?serverTimezone=UTC&amp;createDatabaseIfNotExist=true&amp;characterEncoding=UTF-8
+    username: root
+    password: 12345678
+    hikari:
+      poolName: uaa-api-pool #${APP_NAME}-pool
+      auto-commit: true
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB103Dialect
+    hibernate:
+      ddl-auto: update
+      show_sql: true
+      format_sql: true
+      generate_statistics: true
+      jdbc.batch_size: 30
+      default_batch_fetch_size: 20
+      order_inserts: true
+      order_updates: true
+      use_sql_comments: true
+      cache.use_second_level_cache: true
+      cache.use_query_cache: true
+      cache.region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+      cache.provider_class: org.hibernate.cache.SingletonEhCacheRegionFactory
