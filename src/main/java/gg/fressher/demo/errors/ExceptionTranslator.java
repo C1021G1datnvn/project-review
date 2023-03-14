@@ -1,3 +1,4 @@
+package gg.fressher.demo.errors;
 //package error;
 //
 //import java.net.URI;

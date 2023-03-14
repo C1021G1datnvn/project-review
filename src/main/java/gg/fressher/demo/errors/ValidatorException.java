@@ -1,3 +1,4 @@
+package gg.fressher.demo.errors;
 //package error;
 //
 //public class ValidatorException extends RuntimeException{
