@@ -40,6 +40,12 @@ public class EthnicityServiceImpl implements EthnicityService{
     
     private final EthnicityMapper mapper;
     
+    
+    /**
+     * Thực hiện chức năng create ...
+     * @requestbody EthnicityModel
+     * @return EthnicityDto
+     */
     @Override
     public EthnicityDto create(EthnicityModel model) {
         model.setCode(model.getCode().toUpperCase());
@@ -47,6 +53,13 @@ public class EthnicityServiceImpl implements EthnicityService{
         return mapper.toDto(newEntity);
     }
 
+    
+    /**
+     * Thực hiện chức năng update ...
+     * @requestbody EthnicityModel, 
+     * @pathvariable id,
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> update(EthnicityModel model, Long id) {
         EthnicityDto ethnicityDto = mapper.toDto(repository.findById(id).get());
@@ -65,6 +78,12 @@ public class EthnicityServiceImpl implements EthnicityService{
         }
     }
 
+    
+    /**
+     * Thực hiện chức năng detail ...
+     * @pathvariable id
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> detail(Long id) {
         EthnicityDto ethnicityDto = mapper.toDto(repository.findById(id).get());
@@ -77,6 +96,12 @@ public class EthnicityServiceImpl implements EthnicityService{
         }
     }
 
+    
+    /**
+     * Thực hiện chức năng delete ...
+     * @pathvariable id
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> delete(Long id) {
         EthnicityDto ethnicityDto = mapper.toDto(repository.findById(id).get());
@@ -92,6 +117,12 @@ public class EthnicityServiceImpl implements EthnicityService{
         }
     }
 
+    
+    /**
+     * Thực hiện chức năng get list ...
+     * @param pageable
+     * @return Paging<EthnicityDto> <= 20 record
+     */
     @Override
     public Paging<EthnicityDto> getList(Pageable pageable) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
@@ -104,6 +135,12 @@ public class EthnicityServiceImpl implements EthnicityService{
         return Paging.of(result);
     }
 
+    
+    /**
+     * Thực hiện chức năng search ...
+     * @param pageable, @PathVariable countryId
+     * @return Paging<EthnicityDto> <= 20 record
+     */
     @Override
     public Paging<EthnicityDto> getListSearchEthnicityOfCountry(Pageable pageable, Long countryId) {
         JPAQuery<Ethnicity> query = new JPAQuery<Ethnicity>(entityManager);
@@ -117,6 +154,12 @@ public class EthnicityServiceImpl implements EthnicityService{
         return Paging.of(result);
     }
 
+    
+    /**
+     * Thực hiện chức năng search ...
+     * @param pageable, @PathVariable continentId
+     * @return Paging<EthnicityDto> <= 20 record
+     */
     @Override
     public Paging<EthnicityDto> getListSearchEthnicityOfContinent(Pageable pageable, Long continentId) {
         JPAQuery<Ethnicity> query = new JPAQuery<Ethnicity>(entityManager);
@@ -130,6 +173,12 @@ public class EthnicityServiceImpl implements EthnicityService{
         return Paging.of(result);
     }
 
+    
+    /**
+     * Thực hiện chức năng check code ...
+     * @param code
+     * @return Boolean
+     */
     public Boolean checkCode(String code) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QEthnicity q = QEthnicity.ethnicity;

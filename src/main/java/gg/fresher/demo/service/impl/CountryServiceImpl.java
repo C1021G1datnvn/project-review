@@ -39,6 +39,12 @@ public class CountryServiceImpl implements CountryService{
     
     private final CountryMapper mapper;
 
+    
+    /**
+     * Thực hiện chức năng create ...
+     * @requestbody CountryModel
+     * @return CountryDto
+     */
     @Override
     public CountryDto create(CountryModel model) {
         model.setCode(model.getCode().toUpperCase());
@@ -46,6 +52,13 @@ public class CountryServiceImpl implements CountryService{
         return mapper.toDto(newEntity);
     }
 
+    
+    /**
+     * Thực hiện chức năng update ...
+     * @requestbody CountryModel, 
+     * @pathvariable id,
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> update(CountryModel model, Long id) {
         CountryDto countryDto = mapper.toDto(repository.findById(id).get());
@@ -63,6 +76,12 @@ public class CountryServiceImpl implements CountryService{
         }
     }
 
+    
+    /**
+     * Thực hiện chức năng detail ...
+     * @pathvariable id
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> detail(Long id) {
         CountryDto countryDto = mapper.toDto(repository.findById(id).get());
@@ -74,7 +93,12 @@ public class CountryServiceImpl implements CountryService{
             return new ResponseEntity<>(countryDto, HttpStatus.OK);  
         }
     }
-
+    
+    /**
+     * Thực hiện chức năng detail ...
+     * @pathvariable id
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> delete(Long id) {
         CountryDto countryDto = mapper.toDto(repository.findById(id).get());
@@ -87,9 +111,15 @@ public class CountryServiceImpl implements CountryService{
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body("Delete successfully");
-    }
+        }
     }
 
+    
+    /**
+     * Thực hiện chức năng get list ...
+     * @param pageable
+     * @return Paging<CountryDto> <= 20 record
+     */
     @Override
     public Paging<CountryDto> getList(Pageable pageable) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
@@ -102,17 +132,11 @@ public class CountryServiceImpl implements CountryService{
         return Paging.of(result);
     }
 
-//    @Override
-//    public List<Country> countryList(Long id) {
-//        JPAQuery<Country> query = new JPAQuery<Country>(entityManager);
-//        QCountry q = QCountry.country;
-//        query.from(q).where(q.deleted.isFalse());
-//        if(id != null) {
-//            query.where(q.continentId.eq(id));
-//        }
-//        return query.fetch();
-//    }
-
+    /**
+     * Thực hiện chức năng search ...
+     * @param pageable, @PathVariable continentId
+     * @return Paging<CountryDto> <= 20 record
+     */
     @Override
     public Paging<CountryDto> getListSearchCountryOfContinent(Pageable pageable, Long continentId) {
         JPAQuery<Country> query = new JPAQuery<Country>(entityManager);
@@ -126,6 +150,11 @@ public class CountryServiceImpl implements CountryService{
         return Paging.of(result);
     }
     
+    /**
+     * Thực hiện chức năng check code ...
+     * @param code
+     * @return Boolean
+     */
     public Boolean checkCode(String code) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QCountry q = QCountry.country;

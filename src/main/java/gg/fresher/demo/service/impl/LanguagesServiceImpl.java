@@ -40,6 +40,12 @@ public class LanguagesServiceImpl implements LanguagesService{
     
     private final LanguagesMapper mapper;
     
+    
+    /**
+     * Thực hiện chức năng create ...
+     * @requestbody LanguagesModel
+     * @return LanguagesDto
+     */
     @Override
     public LanguagesDto create(LanguagesModel model) {            
             model.setCode(model.getCode().toUpperCase());
@@ -47,6 +53,13 @@ public class LanguagesServiceImpl implements LanguagesService{
             return mapper.toDto(newEntity);
     }
     
+    
+    /**
+     * Thực hiện chức năng update ...
+     * @requestbody LanguagesModel, 
+     * @pathvariable id,
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> update(LanguagesModel model, Long id) {
         LanguagesDto languagesDto = mapper.toDto(repository.findById(id).get());
@@ -64,6 +77,12 @@ public class LanguagesServiceImpl implements LanguagesService{
         }
     }
     
+    
+    /**
+     * Thực hiện chức năng detail ...
+     * @pathvariable id
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> detail(Long id) {
         LanguagesDto languagesDto = mapper.toDto(repository.findById(id).get());
@@ -76,6 +95,12 @@ public class LanguagesServiceImpl implements LanguagesService{
         }
     }
     
+    
+    /**
+     * Thực hiện chức năng delete ...
+     * @pathvariable id
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> delete(Long id) {
         LanguagesDto languagesDto = mapper.toDto(repository.findById(id).get());
@@ -91,6 +116,12 @@ public class LanguagesServiceImpl implements LanguagesService{
         }
     }
     
+    
+    /**
+     * Thực hiện chức năng get list ...
+     * @param pageable
+     * @return Paging<LanguagesDto> <= 20 record
+     */
     @Override
     public Paging<LanguagesDto> getList(Pageable pageable) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
@@ -103,6 +134,11 @@ public class LanguagesServiceImpl implements LanguagesService{
         return Paging.of(result);
     }
 
+    /**
+     * Thực hiện chức năng search ...
+     * @param pageable, @PathVariable countryId
+     * @return Paging<LanguagesDto> <= 20 record
+     */
     @Override
     public Paging<LanguagesDto> getListSearchLanguagesOfCountry(Pageable pageable, Long countryId) {
         JPAQuery<Languages> query = new JPAQuery<Languages>(entityManager);
@@ -116,6 +152,11 @@ public class LanguagesServiceImpl implements LanguagesService{
         return Paging.of(result);
     }
     
+    /**
+     * Thực hiện chức năng check code ...
+     * @param code
+     * @return Boolean
+     */
     public Boolean checkCode(String code) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QLanguages q = QLanguages.languages;

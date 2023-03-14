@@ -17,9 +17,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import gg.fresher.demo.dtos.ContinentDto;
 import gg.fresher.demo.entities.Continent;
-import gg.fresher.demo.entities.Ethnicity;
 import gg.fresher.demo.entities.QContinent;
-import gg.fresher.demo.entities.QEthnicity;
 import gg.fresher.demo.mappers.ContinentMapper;
 import gg.fresher.demo.repositories.ContinentJpaRepository;
 import gg.fresher.demo.service.ContinentService;
@@ -41,6 +39,12 @@ public class ContinentServiceImpl implements ContinentService{
     
     private final ContinentMapper mapper;
 
+    
+    /**
+     * Thực hiện chức năng create ...
+     * @requestbody ContinentMdel
+     * @return continentDto
+     */
     @Override
     public ContinentDto create(ContinentModel model) {
         model.setCode(model.getCode().toUpperCase());
@@ -48,6 +52,13 @@ public class ContinentServiceImpl implements ContinentService{
         return mapper.toDto(newEntity);
     }
 
+    
+    /**
+     * Thực hiện chức năng update ...
+     * @requestbody ContinentMdel, 
+     * @pathvariable id,
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> update(ContinentModel model, Long id) {
         ContinentDto continentDto = mapper.toDto(repository.findById(id).get());
@@ -64,6 +75,12 @@ public class ContinentServiceImpl implements ContinentService{
         }
     }
 
+    
+    /**
+     * Thực hiện chức năng detail ...
+     * @pathvariable id
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> detail(Long id) {
         ContinentDto continentDto = mapper.toDto(repository.findById(id).get());
@@ -76,6 +93,12 @@ public class ContinentServiceImpl implements ContinentService{
         }
     }
 
+    
+    /**
+     * Thực hiện chức năng detail ...
+     * @pathvariable id
+     * @return ResponseEntity
+     */
     @Override
     public ResponseEntity<?> delete(Long id) {
         ContinentDto continentDto = mapper.toDto(repository.findById(id).get());
@@ -91,6 +114,12 @@ public class ContinentServiceImpl implements ContinentService{
         }
     }
 
+    
+    /**
+     * Thực hiện chức năng get list ...
+     * @param pageable
+     * @return Paging<ContinentDto> <= 20 record
+     */
     @Override
     public Paging<ContinentDto> getList(Pageable pageable) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
@@ -103,6 +132,12 @@ public class ContinentServiceImpl implements ContinentService{
         return Paging.of(result);
     }
     
+    
+    /**
+     * Thực hiện chức năng check code ...
+     * @param code
+     * @return Boolean
+     */
     public Boolean checkCode(String code) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
         QContinent q = QContinent.continent;
