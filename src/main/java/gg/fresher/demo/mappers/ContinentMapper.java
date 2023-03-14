@@ -6,7 +6,6 @@ import org.mapstruct.Mapping;
 
 import gg.fresher.demo.dtos.ContinentDto;
 import gg.fresher.demo.entities.Continent;
-import gg.fresher.demo.entities.Languages;
 import gg.fresher.demo.service.model.ContinentModel;
 
 @Mapper(uses = LanguagesMapper.class)

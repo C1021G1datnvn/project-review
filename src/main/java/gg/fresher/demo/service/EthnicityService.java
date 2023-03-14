@@ -3,7 +3,6 @@ package gg.fresher.demo.service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
-import gg.fresher.demo.dtos.CountryDto;
 import gg.fresher.demo.dtos.EthnicityDto;
 import gg.fresher.demo.service.model.EthnicityModel;
 import gg.fresher.demo.utils.Paging;

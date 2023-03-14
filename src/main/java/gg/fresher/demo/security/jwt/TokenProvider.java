@@ -1,4 +1,4 @@
-package gg.fressher.demo.security.JWT;
+package gg.fresher.demo.security.jwt;
 //package security.JWT;
 //
 //import java.security.Key;

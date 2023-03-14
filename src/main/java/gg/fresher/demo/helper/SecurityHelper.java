@@ -1,4 +1,4 @@
-package gg.fressher.demo.helper;
+package gg.fresher.demo.helper;
 //package helper;
 //
 //

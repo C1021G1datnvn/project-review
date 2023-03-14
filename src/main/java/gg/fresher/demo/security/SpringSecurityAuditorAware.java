@@ -1,4 +1,4 @@
-package gg.fressher.demo.security;
+package gg.fresher.demo.security;
 //package security;
 //
 //import java.util.Objects;

@@ -1,13 +1,9 @@
 package gg.fresher.demo.service;
 
-import java.util.List;
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import gg.fresher.demo.dtos.CountryDto;
-import gg.fresher.demo.entities.Continent;
-import gg.fresher.demo.entities.Country;
 import gg.fresher.demo.service.model.CountryModel;
 import gg.fresher.demo.utils.Paging;
 /**

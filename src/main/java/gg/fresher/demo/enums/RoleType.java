@@ -1,4 +1,4 @@
-package gg.fressher.demo.enums;
+package gg.fresher.demo.enums;
 //package enums;
 //
 //public enum RoleType {
